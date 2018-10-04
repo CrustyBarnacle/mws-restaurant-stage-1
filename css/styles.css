@@ -138,8 +138,7 @@ nav h1 a {
   padding: 30px 15px 60px;
   text-align: center;
   display: flex; /* Add flex"ability" to containing element */
-  flex-direction: column; /* Set default flow of items in containing element */
-  align-items: center; /* Elements are centered by default */
+  flex-wrap: wrap; /* Nicely wraps to next line on larger displays */
 }
 #restaurants-list li {
   background-color: #fff;
@@ -150,7 +149,6 @@ nav h1 a {
   padding: 0 30px 25px;
   text-align: left;
   max-width: 475px; /* For desktop/larger displays */
-  width: 80%; /* For mobile/smaller displays */
 }
 #restaurants-list .restaurant-img {
   background-color: #ccc;
@@ -287,5 +285,23 @@ nav h1 a {
 @media screen and (max-width: 585px) {
 	.inside #map-container {
 	  width: 40%; // Decreased width to add space for address, hours
+	}
+	#breadcrumb {
+	    padding: 5px 20px 8px;
+	    font-size: 12px;
+	}
+	#restaurants-list {
+	  flex-direction: column; /* Set default flow of items in containing element */
+	  align-items: center; /* Elements are centered by default */
+	}
+	#restaurants-list li {
+	  width: 80%; /* For mobile/smaller displays */
+	}
+	#restaurant-name {
+	  font-size: 14pt; /* Smaller size */
+	}
+	#restaurant-address {
+	  font-size: 10pt;
+	  margin: 10px 5px;
 	}
 }
