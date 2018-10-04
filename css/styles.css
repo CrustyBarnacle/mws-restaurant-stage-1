@@ -204,7 +204,7 @@ nav h1 a {
   position: fixed;
   right: 0;
   top: 80px;
-  width: 40%; // Decreased width to add space for address, hours
+  width: 50%;
 }
 .inside #map {
   background-color: #ccc;
@@ -281,4 +281,11 @@ nav h1 a {
 }
 #restaurant-hours td {
   color: #666;
+}
+
+/* Responsive CSS for small screen - limit map width */
+@media screen and (max-width: 585px) {
+	.inside #map-container {
+	  width: 40%; // Decreased width to add space for address, hours
+	}
 }
