@@ -6,7 +6,7 @@ console.log("service Worker: Registered");
 
 // Array of files to cache
 const cachedFiles = [
-    '/',
+    // '/',
     'index.html',
     'restaurant.html',
     'css/styles.css',
@@ -30,6 +30,7 @@ const cachedFiles = [
 self.addEventListener('install', function(event) {
     event.waitUntil(
         caches.open('v1').then(function(cache) {
+            console.log('Cache opened');
             return cache.addAll(cachedFiles);
         })
     );
@@ -39,12 +40,12 @@ self.addEventListener('install', function(event) {
 // Listen for fetch e - is request cached?
 self.addEventListener('fetch', function(event) {
     event.respondWith(
-        caches.match(event.request).then(function(response) {
+        caches.match(event.request)
+        .then(function(response) {
             if (response) {
-                console.log('Match...');
                 return response;
-            return fetch(event.request);
             }
+            return fetch(event.request);
         })
     );
 });
