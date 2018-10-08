@@ -290,6 +290,7 @@ nav h1 a {
 	#breadcrumb {
 	    padding: 5px 20px 8px;
 	    font-size: 12px;
+		width: auto;
 	}
 	#restaurants-list {
 	  flex-direction: column; /* Set default flow of items in containing element */
@@ -315,9 +316,11 @@ nav h1 a {
 	.inside #map-container {
 	  width: 30%; // Decreased width to add space for address, hours
 	  flex-shrink: 2;
+	  height: 65%;
+	  top: 80px;
 	}
 	#breadcrumb {
-	    padding: 2px 10px 4px;
+	    padding: 2px 5px 2px;
 	    font-size: 9px;
 	}
 	#restaurants-list li {
