@@ -4,9 +4,11 @@
 
 console.log("service Worker: Registered");
 
+const CACHE_NAME = 'v1';
+
 // Array of files to cache
-const cachedFiles = [
-    // '/',
+let cachedFiles = [
+    '/',
     'index.html',
     'restaurant.html',
     'css/styles.css',
@@ -29,7 +31,7 @@ const cachedFiles = [
 
 self.addEventListener('install', function(event) {
     event.waitUntil(
-        caches.open('v1').then(function(cache) {
+        caches.open(CACHE_NAME).then(function(cache) {
             console.log('Cache opened');
             return cache.addAll(cachedFiles);
         })
@@ -40,12 +42,31 @@ self.addEventListener('install', function(event) {
 // Listen for fetch e - is request cached?
 self.addEventListener('fetch', function(event) {
     event.respondWith(
-        caches.match(event.request)
-        .then(function(response) {
+        caches.match(event.request).then(function(response) {
             if (response) {
-                return response;
+                return response; // Cached - just return it
             }
-            return fetch(event.request);
+            cacheRequest(event); // Return response and cache
         })
     );
 });
+
+
+// Cache and return Request
+function cacheRequest(event) {
+    let url = event.request.clone();
+    return fetch(url).then(function(response){
+        //if not a valid response send the error
+        if(!response || res.status !== 200 || res.type !== 'basic'){
+            return response;
+        }
+
+        let responseToCache = response.clone();
+
+        caches.open(CACHE_NAME).then(function(cache){
+            cache.put(event.request, responseToCache);
+        });
+
+        return response;
+    })
+}
